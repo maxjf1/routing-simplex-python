@@ -5,6 +5,8 @@ def readFile(path):
     customers = []
     for line in file:
         fields = line.replace("\n", "").split(" ")
+        if(len(fields) < 6):
+            continue
         while("" in fields):
             fields.remove("")
         customers.append(Customer(fields))
