@@ -1,22 +1,30 @@
 from math import sqrt, pow
 
-
+# Helper functions
 def max(a, b):
     return a if a > b else b
 
 
-def readFile(path):
-    file = open(path)
+class Instance:
     customers = []
-    for line in file:
-        fields = line.replace("\n", "").split(" ")
-        if(len(fields) < 6):
-            continue
-        while("" in fields):
-            fields.remove("")
-        customers.append(Customer(fields))
 
-    return customers
+    def __init__(self, file):
+        lines = file.split("\n")
+        self.name = lines[0]
+        data = lines[4].split(" ")
+        while("" in data):
+            data.remove("")
+        self.vehicles = int(data[0])
+        self.capacity = int(data[1])
+        lines = lines[9::]
+
+        for line in lines:
+            fields = line.replace("\r", "").replace("\n", "").split(" ")
+            while("" in fields):
+                fields.remove("")
+            if(len(fields) < 6):
+                continue
+            self.customers.append(Customer(fields))
 
 
 class Customer:
@@ -40,7 +48,8 @@ class Route:
 
     def addCustomer(self, customer):
         self.demand += customer.weigth
-        self.endTime = max(customer.timeWindow[0], self.customers[-1].timeWindow[0])
+        self.endTime = max(
+            customer.timeWindow[0], self.customers[-1].timeWindow[0])
         self.distance += sqrt(
             pow(customer.x - self.customers[-1].x) +
             pow(customer.y - self.customers[-1].y))
