@@ -4,16 +4,31 @@ from gurobipy import *
 
 try:
 
+    # link:     https://www.dcc.fc.up.pt/~jpp/code/gurobi_book/vrp.py
+
     # Create a new model
     m = Model("roteamento")
+    
+    # Create variables
+    
+    R = {} #lista de rodas
+    x = {}     
+    c = {}
+    
+    for i in R:   
+        x[i] = m.addVar(ub=1, vtype="I", name="x(%s)"%(i))
+        
+    # Set objective
+    m.setObjective(quicksum(c[i]*x[i] for i in V), GRB.MINIMIZE)
 
-    custoRota = tuplelist([("rota1", 5), ("rota2", 15), ("rota3", 10)])
-    rotaSelecionada = tuplelist([("rota1", 1), ("rota2", 0), ("rota3", 1)])
-    rotaCliente = tuplelist([("rota1", "cliente1", 1), ("rota1", "cliente2", 1), ("rota1", "cliente3", 0)])
-    a = m.addVars(rotaSelecionada, name="a")
-    c = m.addVars(custoRota, name="c")
-    x = m.addVars(rotaCliente, name="x")
+    # Add constraint: x + 2 y + 3 z <= 4
+    #m.addConstr(x + 2 * y + 3 * z <= 4, "c0")
 
+    # Add constraint: x + y >= 1
+    #m.addConstr(x + y >= 1, "c1")
+
+    # Optimize model
+    m.optimize()
 
 except GurobiError as e:
     print('Error code ' + str(e.errno) + ": " + str(e))
