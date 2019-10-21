@@ -1,17 +1,14 @@
 from Structs import Customer, Instance, Route
 
 
-
-
 def readFile(path):
     file = open(path)
-    instance = Instance(file.read())
-    return instance
-
+    return file.read()
 
 
 def main():
-    instance = readFile("./models/r101.txt")
+    instance = Instance(readFile("./models/r101.txt"))
+    instance.generateRoutes()
     
 
 
