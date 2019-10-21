@@ -1,34 +1,38 @@
 #!/usr/bin/python
 
 from gurobipy import *
+from Structs import Route
 
 try:
-
-    # link:     https://www.dcc.fc.up.pt/~jpp/code/gurobi_book/vrp.py
-
+ 
     # Create a new model
     m = Model("roteamento")
     
-    # Create variables
-    
-    R = {} #lista de rodas
+    R = {} # lista de rotas
+    J = {1, 2, 3, 5, 100} # lista de clientes  
     x = {}     
     c = {}
     
+    # Create variables
     for i in R:   
         x[i] = m.addVar(ub=1, vtype="I", name="x(%s)"%(i))
-        
+    m.update()   
+
     # Set objective
-    m.setObjective(quicksum(c[i]*x[i] for i in V), GRB.MINIMIZE)
+    m.setObjective(quicksum(R[i].custo()*x[i] for i in R), GRB.MINIMIZE)
+    m.update()   
 
-    # Add constraint: x + 2 y + 3 z <= 4
-    #m.addConstr(x + 2 * y + 3 * z <= 4, "c0")
-
-    # Add constraint: x + y >= 1
-    #m.addConstr(x + y >= 1, "c1")
+    # Add constraint
+    for i in R:         
+        model.addConstr(quicksum(int(R[i].isInRoute(j))*x[i] for j in J) == 1, "Cliente (%s) esta na rota (%s)"%(j, i))
+    m.update()
 
     # Optimize model
     m.optimize()
+
+    for v in m.getVars():
+        print('%s %g' % (v.varName, v.x))
+    print('Obj: %g' % m.objVal)
 
 except GurobiError as e:
     print('Error code ' + str(e.errno) + ": " + str(e))
