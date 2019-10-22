@@ -1,4 +1,5 @@
 from math import sqrt, pow
+import random
 
 # Helper function
 
@@ -9,13 +10,16 @@ def max(a, b):
 
 def distance(coordsA, coordsB):
     return sqrt(
-        pow(coordsA[0] - coordsB[0]) +
-        pow(coordsA[1] - coordsB[1]))
+        pow(coordsA[0] - coordsB[0], 2) +
+        pow(coordsA[1] - coordsB[1], 2))
 
 
 class Instance:
+    'Instância do problema'
     customers = []
     routes = []
+    vehicles = 0
+    capacity = 0
 
     def __init__(self, file):
         lines = file.split("\n")
@@ -35,20 +39,45 @@ class Instance:
                 continue
             self.customers.append(Customer(fields))
 
-    def generateRoutes(self, ammount=2000):
-        route = Route(self.customers[0])
-
-        sortedCustomers = self.customers
-        sortedCustomers.sort(
-            key=lambda c: c.timeWindow[1] - c.timeWindow[0])
-
-        for customer in sortedCustomers:
-            print(customer.id)
-
+    def addRoute(self, route):
+        # print("ADD route", route.getId())
+        for r in self.routes:
+            if not route.getId() or r.getId() == route.getId():
+                return
         self.routes.append(route)
+        print("Route: ", len(self.routes),
+              "\tD:", round(route.distance, 2),
+              "\tP:", route.demand,
+              "\tT:", round(route.beginTime, 2), ":", round(route.endTime, 2),
+              "\t", route.getId())
+
+    def generateRoutes(self, ammount=20000):
+        random.seed(42)
+        self.routes = []
+        customers = self.customers[1::]
+        random.shuffle(customers)
+        route = Route(self.customers[0])
+        i = 0
+        while(len(self.routes) < ammount):
+            if(route.canAddCustomer(customers[i], self.capacity)):
+                route.addCustomer(customers[i])
+                customers.remove(customers[i])
+            else:
+                i += 1
+            if(i >= len(customers)):
+                route.closeRoute()
+                self.addRoute(route)
+                route = Route(self.customers[0])
+                i = 0
+
+            if(len(customers) == 0):
+                customers = self.customers[1::]
+                random.shuffle(customers)
 
 
 class Customer:
+    'Cliente'
+
     def __init__(self, fields):
         id, x, y, weigth, begin, end, serviceTime = fields
         self.id = int(id)
@@ -62,28 +91,47 @@ class Customer:
 
 
 class Route:
-    customers = []
-    demand = 0
-    distance = 0
-    endTime = 0
+    'Rota com informações'
 
     def __init__(self, base):
-        self.customers.append(base)
-    # Gera ID unico para a rota
+        self.customers = []
+        self.demand = 0
+        self.distance = 0
+        self.beginTime = 0
+        self.endTime = 0
+        self.id = False
+        self.customers = [base]
 
-    def getRouteID(self):
-        return " ".join(map(lambda customer: customer.id, self.customers))
+    def closeRoute(self):
+        self.addCustomer(self.customers[0])
+        self.beginTime = self.customers[1].timeWindow[0] - \
+            self.customers[0].distanceOf(self.customers[1])
+
+    # Gera ID unico para a rota
+    def getId(self):
+        if(self.id):
+            return self.id
+
+        id = " ".join(map(lambda customer: str(
+            customer.id), self.customers[1:-2]))
+
+        if(self.customers[-1].id == self.customers[0].id):
+            self.id = id
+        return id
 
     def isInRoute(self, customerId):
         for c in self.customers:
-            if c.id == customerId: 
+            if c.id == customerId:
                 return True
         return False
-        
+
     def addCustomer(self, customer):
         self.demand += customer.weigth
         dist = customer.distanceOf(self.customers[-1])
         self.endTime = max(
-            customer.timeWindow[0], self.customers[-1].timeWindow[0]) + dist + customer.serviceTime
+            customer.timeWindow[0], self.endTime) + dist + customer.serviceTime
         self.distance += dist
         self.customers.append(customer)
+
+    def canAddCustomer(self, customer,  capacity):
+        return self.demand + customer.weigth < capacity and self.endTime + customer.distanceOf(self.customers[-1]) < customer.timeWindow[1]
