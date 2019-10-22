@@ -3,10 +3,12 @@
 from gurobipy import *
 from Structs import Route, Instance, Customer
 from main import readFile
+import logging
+
 try:
     
     instance = Instance(readFile("./models/c101.txt"))
-    instance.generateRoutes(200)
+    instance.generateRoutes(1000)
 
     # Create a new model
     m = Model("roteamento")
@@ -30,14 +32,15 @@ try:
     #print "TESTE", routes[67].distance
 
     # Add constraint
-    for i in R:               
-        m.addConstr(quicksum(int(routes[i].isInRoute(j))*x[i] for j in J) >= 1, "Cliente esta na rota ")
+    for i in range(1, len(instance.customers)):               
+        m.addConstr(quicksum(int(routes[j].isInRoute(i))*x[j] for j in R) == 1, "Cliente esta na rota ")
     m.update()
 
     # Optimize model
     m.optimize()
 
-    print "teste", x
+    for i in x:
+        print x[i]
 
 
 except GurobiError as e:
