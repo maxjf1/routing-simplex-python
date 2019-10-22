@@ -1,41 +1,47 @@
 #!/usr/bin/python
 
 from gurobipy import *
-from Structs import Route
-
+from Structs import Route, Instance, Customer
+from main import readFile
 try:
- 
+    
+    instance = Instance(readFile("./models/c101.txt"))
+    instance.generateRoutes(200)
+
     # Create a new model
     m = Model("roteamento")
     
-    R = {} # lista de rotas
-    J = {1, 2, 3, 5, 100} # lista de clientes  
-    x = {}     
-    c = {}
-    
+    R = [x for x in range(len(instance.routes))]
+    J = [x for x in range(1, len(instance.customers))]
+    x = {}   
+    routes = instance.routes
+
+    #print("Custo rota", routes[0].distance)
+
     # Create variables
     for i in R:   
-        x[i] = m.addVar(ub=1, vtype="I", name="x(%s)"%(i))
+        x[i] = m.addVar(lb=0, ub=1, vtype="I", name="x(%s)"%(i))
     m.update()   
 
     # Set objective
-    m.setObjective(quicksum(R[i].custo()*x[i] for i in R), GRB.MINIMIZE)
+    m.setObjective(quicksum(routes[i].distance*x[i] for i in R), GRB.MINIMIZE)
     m.update()   
 
+    #print "TESTE", routes[67].distance
+
     # Add constraint
-    for i in R:         
-        model.addConstr(quicksum(int(R[i].isInRoute(j))*x[i] for j in J) == 1, "Cliente (%s) esta na rota (%s)"%(j, i))
+    for i in R:               
+        m.addConstr(quicksum(int(routes[i].isInRoute(j))*x[i] for j in J) >= 1, "Cliente esta na rota ")
     m.update()
 
     # Optimize model
     m.optimize()
 
-    for v in m.getVars():
-        print('%s %g' % (v.varName, v.x))
-    print('Obj: %g' % m.objVal)
+    print "teste", x
+
 
 except GurobiError as e:
     print('Error code ' + str(e.errno) + ": " + str(e))
 
-except AttributeError:
-    print('Encountered an attribute error')
+except AttributeError as e:
+    print('Encountered an attribute error', e.message)

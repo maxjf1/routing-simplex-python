@@ -15,7 +15,7 @@ def distance(coordsA, coordsB):
 
 
 class Instance:
-    'Instância do problema'
+    'Instancia do problema'
     customers = []
     routes = []
     vehicles = 0
@@ -45,11 +45,11 @@ class Instance:
             if not route.getId() or r.getId() == route.getId():
                 return
         self.routes.append(route)
-        print("Route: ", len(self.routes),
-              "\tD:", round(route.distance, 2),
-              "\tP:", route.demand,
-              "\tT:", round(route.beginTime, 2), ":", round(route.endTime, 2),
-              "\t", route.getId())
+        #print("Route: ", len(self.routes),
+        #      "\tD:", round(route.distance, 2),
+        #      "\tP:", route.demand,
+        #      "\tT:", round(route.beginTime, 2), ":", round(route.endTime, 2),
+        #      "\t", route.getId())
 
     def generateRoutes(self, ammount=20000):
         random.seed(42)
@@ -91,7 +91,7 @@ class Customer:
 
 
 class Route:
-    'Rota com informações'
+    'Rota com informacoes'
 
     def __init__(self, base):
         self.customers = []
