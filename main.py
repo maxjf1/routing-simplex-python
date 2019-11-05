@@ -6,9 +6,10 @@ from Structs import Route, Instance, Customer
 from helpers import readFile
 import logging
 from Instance import Instance
-
+import sys
 
 try:
+    file = sys.argv[1] if len(sys.argv) > 2 else "./models/c101.txt"
     instance = Instance(readFile("./models/c101.txt"))
     instance.generateRoutes(1000)
 

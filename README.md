@@ -12,8 +12,10 @@ Tenha um ambiente gurobi apropriadamente configurado.
 apt-get install python3 python3-pip
 
 # Executar o projeto
-gurobi.sh main.py
+gurobi.sh main.py ./models/INSTANCIA.txt # modifique para sua instância
 ```
+
+Para executar todas as instâncias, execute o script [benchmark.sh](benchmark.sh)
 
 ## Modelos
 

@@ -1,0 +1,1 @@
+Saida de logs nesta pasta
