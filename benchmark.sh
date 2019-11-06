@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Roda para multiplas instâncias
+# Roda para todas instâncias
+
+rm -rf ./logs/*.log
 
 my_array=(
     c101

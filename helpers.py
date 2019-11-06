@@ -23,11 +23,11 @@ def readFile(path):
 
 
 def measure(callback):
-    start = datetime.datetime.now()
+    start = datetime.datetime.utcnow()
     callback()
-    end = datetime.datetime.now()
+    end = datetime.datetime.utcnow()
     duration = end - start
-    print("Execution time: ", duration)
+    print "Execution time: ", duration.total_seconds()/60, " minutes"
 
 
 
