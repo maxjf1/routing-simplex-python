@@ -2,6 +2,7 @@ from Customer import Customer
 from Route import Route
 import random
 
+
 class Instance:
     'Instancia do problema'
     customers = []
@@ -9,14 +10,14 @@ class Instance:
     vehicles = 0
     capacity = 0
 
-    def __init__(self, file):
+    def __init__(self, file, nCustomers=0):
         'Le conteudo do arquivo de instancia'
         lines = file.split("\n")
         self.name = lines[0]
         data = lines[4].split(" ")
         while("" in data):
             data.remove("")
-        self.vehicles = int(data[0])
+        self.vehicles = nCustomers or int(data[0])
         self.capacity = int(data[1])
         lines = lines[9::]
 
@@ -27,6 +28,8 @@ class Instance:
             if(len(fields) < 6):
                 continue
             self.customers.append(Customer(fields))
+            if nCustomers and len(self.customers) >= nCustomers+1:
+                break
 
     def addRoute(self, route):
         'Adiciona rota a lista de rotas, se nao presente'
@@ -34,33 +37,50 @@ class Instance:
             if not route.getId() or r.getId() == route.getId():
                 return
         self.routes.append(route)
-        #print("Route: ", len(self.routes),
-        #      "\tD:", round(route.distance, 2),
-        #      "\tP:", route.demand,
-        #      "\tT:", round(route.beginTime, 2), ":", round(route.endTime, 2),
-        #      "\t", route.getId())
+        print("Route: ", len(self.routes),
+              "\tD:", round(route.distance, 2),
+              "\tP:", route.demand,
+              "\tT:", round(route.beginTime, 2), ":", round(route.endTime, 2),
+              "\t", route.getId())
 
-    def generateRoutes(self, ammount=20000):
+    def generateRoutes(self, ammount=20000, alpha=0.999):
         'gera N rotas randomicas'
         random.seed(42)
         self.routes = []
+        randomRange = int((len(self.customers)-1) * alpha)
         customers = self.customers[1::]
-        random.shuffle(customers)
+        customersIgnored = []
         route = Route(self.customers[0])
-        i = 0
+        def sortFunc(c): return c.distanceOf(route.customers[-1])
+        customers.sort(key=sortFunc)
         while(len(self.routes) < ammount):
-            if(route.canAddCustomer(customers[i], self.capacity)):
-                route.addCustomer(customers[i])
-                customers.remove(customers[i])
+
+            i = random.randint(
+                0, randomRange)
+            nextCustomer = customers[i % len(customers)]
+            # print "HOHO", i % len(customers), i, len(customers)
+            if(route.canAddCustomer(nextCustomer, self.capacity)):
+                # print 'ADD'
+                route.addCustomer(nextCustomer)
+                customers.remove(nextCustomer)
+                customers.extend(customersIgnored)
+                customersIgnored = []
+                customers.sort(key=sortFunc)
             else:
-                i += 1
-            if(i >= len(customers)):
+                # print 'IGNORE'
+                customersIgnored.append(nextCustomer)
+                customers.remove(nextCustomer)
+
+            if(len(customers) == 0):
+                # print 'CLOSING'
                 route.closeRoute()
                 self.addRoute(route)
                 route = Route(self.customers[0])
-                i = 0
+                customers.extend(customersIgnored)
+                customersIgnored = []
 
-            if(len(customers) == 0):
-                customers = self.customers[1::]
-                random.shuffle(customers)
+                if(len(customers) == 0):
+                    # print 'RESETING'
+                    customers = self.customers[1::]
 
+                customers.sort(key=sortFunc)

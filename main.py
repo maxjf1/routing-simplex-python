@@ -12,8 +12,9 @@ def main():
     try:
         file = sys.argv[1] if len(sys.argv) >1 else "./models/c101.txt"
         print "Running for instance " + file
-        instance = Instance(readFile(file))
-        instance.generateRoutes(2000)
+        instance = Instance(readFile(file), 100)
+        print "Generating routes..."
+        measure(lambda : instance.generateRoutes(2000))
 
         # Create a new model
         m = Model("roteamento")
@@ -27,7 +28,7 @@ def main():
 
         # Create variables
         for i in R:   
-            x[i] = m.addVar(lb=0, ub=1, vtype="I", name="x(%s)"%(i))
+            x[i] = m.addVar(lb=0, ub=1, vtype="I", name="x%s"%(i))
         m.update()   
 
         # Set objective
@@ -45,6 +46,7 @@ def main():
         m.update()
         
         # Optimize model
+        m.write("Modelo.lp")
         m.optimize()
 
         resultado = []
