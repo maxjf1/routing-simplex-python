@@ -17,7 +17,7 @@ class Instance:
         data = lines[4].split(" ")
         while("" in data):
             data.remove("")
-        self.vehicles = nCustomers or int(data[0])
+        self.vehicles = int(data[0])
         self.capacity = int(data[1])
         lines = lines[9::]
 
@@ -35,15 +35,16 @@ class Instance:
         'Adiciona rota a lista de rotas, se nao presente'
         for r in self.routes:
             if not route.getId() or r.getId() == route.getId():
-                return
+                return False
         self.routes.append(route)
-        print("Route: ", len(self.routes),
-              "\tD:", round(route.distance, 2),
-              "\tP:", route.demand,
-              "\tT:", round(route.beginTime, 2), ":", round(route.endTime, 2),
-              "\t", route.getId())
+        # print("Route: ", len(self.routes),
+        #       "\tD:", round(route.distance, 2),
+        #       "\tP:", route.demand,
+        #       "\tT:", round(route.beginTime, 2), ":", round(route.endTime, 2),
+        #       "\t", route.getId())
+        return True
 
-    def generateRoutes(self, ammount=20000, alpha=0.999):
+    def generateRoutes(self, ammount=20000, alpha=0.2, maxLoops =4000000 ):
         'gera N rotas randomicas'
         random.seed(42)
         self.routes = []
@@ -53,7 +54,15 @@ class Instance:
         route = Route(self.customers[0])
         def sortFunc(c): return c.distanceOf(route.customers[-1])
         customers.sort(key=sortFunc)
+        it = 0
         while(len(self.routes) < ammount):
+            it += 1
+            if it == (maxLoops/2):
+                print "Atingindo numero maximo de execucoes. abrindo alpha"
+                randomRange = len(customers)-1
+            if it > maxLoops:
+                print "Maximo de execucoes sem resultados atingido."
+                break
 
             i = random.randint(
                 0, randomRange)
@@ -74,7 +83,8 @@ class Instance:
             if(len(customers) == 0):
                 # print 'CLOSING'
                 route.closeRoute()
-                self.addRoute(route)
+                if(self.addRoute(route)):
+                    it = 0
                 route = Route(self.customers[0])
                 customers.extend(customersIgnored)
                 customersIgnored = []
@@ -82,5 +92,4 @@ class Instance:
                 if(len(customers) == 0):
                     # print 'RESETING'
                     customers = self.customers[1::]
-
                 customers.sort(key=sortFunc)

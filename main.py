@@ -12,9 +12,9 @@ def main():
     try:
         file = sys.argv[1] if len(sys.argv) >1 else "./models/c101.txt"
         print "Running for instance " + file
-        instance = Instance(readFile(file), 100)
+        instance = Instance(readFile(file), 25)
         print "Generating routes..."
-        measure(lambda : instance.generateRoutes(2000))
+        measure(lambda : instance.generateRoutes(5000))
 
         # Create a new model
         m = Model("roteamento")
@@ -39,7 +39,7 @@ def main():
 
         # Add constraint
         for i in range(1, len(instance.customers)):               
-            m.addConstr(quicksum(int(routes[j].isInRoute(i)) * x[j] for j in R) >= 1, "Cliente esta na rota ")
+            m.addConstr(quicksum(int(routes[j].isInRoute(i)) * x[j] for j in R) >= 1, "Cliente esta na rota")
         m.update()
 
         m.addConstr(quicksum(x[i] for i in R) <= instance.vehicles, "Max veiculos")

@@ -1,29 +1,51 @@
 Running for instance ./models/r102.txt
-Optimize a model with 101 rows, 2000 columns and 9273 nonzeros
-Variable types: 0 continuous, 2000 integer (0 binary)
+Generating routes...
+Execution time:  21.0751736667  minutes
+Academic license - for non-commercial use only
+Warning: constraint name "Cliente esta na rota" has a space
+Optimize a model with 26 rows, 5000 columns and 29602 nonzeros
+Variable types: 0 continuous, 5000 integer (0 binary)
 Coefficient statistics:
   Matrix range     [1e+00, 1e+00]
-  Objective range  [3e+01, 2e+02]
+  Objective range  [4e+01, 2e+02]
   Bounds range     [1e+00, 1e+00]
   RHS range        [1e+00, 2e+01]
-Presolve removed 0 rows and 18 columns
-Presolve time: 0.01s
-Presolved: 101 rows, 1982 columns, 9197 nonzeros
-Variable types: 0 continuous, 1982 integer (1982 binary)
+Found heuristic solution: objective 1807.3979310
+Presolve removed 0 rows and 2978 columns
+Presolve time: 0.02s
+Presolved: 26 rows, 2022 columns, 12036 nonzeros
+Found heuristic solution: objective 901.7732498
+Variable types: 0 continuous, 2022 integer (2022 binary)
 
-Root relaxation: infeasible, 343 iterations, 0.01 seconds
+Root relaxation: objective 7.035071e+02, 65 iterations, 0.00 seconds
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-     0     0 infeasible    0               - infeasible      -     -    0s
+     0     0  703.50714    0    4  901.77325  703.50714  22.0%     -    0s
+H    0     0                     751.0836456  703.50714  6.33%     -    0s
+H    0     0                     710.6623459  703.50714  1.01%     -    0s
+H    0     0                     706.1282891  703.50714  0.37%     -    0s
+     0     0     cutoff    0       706.12829  706.12829  0.00%     -    0s
 
-Explored 0 nodes (343 simplex iterations) in 0.04 seconds
+Cutting planes:
+  Zero half: 1
+
+Explored 1 nodes (67 simplex iterations) in 0.04 seconds
 Thread count was 8 (of 8 available processors)
 
-Solution count 0
+Solution count 5: 706.128 710.662 751.084 ... 1043.02
 
-Model is infeasible
-Best objective -, best bound -, gap -
-('Encountered an attribute error', AttributeError("Unable to retrieve attribute 'x'",))
-Execution time:  0.0382806  minutes
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.061282891464e+02, best bound 7.061282891464e+02, gap 0.0000%
+18
+8
+19
+7 11 20
+2 23
+3 9 24
+16 17
+2 15 22 4
+14 6 13
+Distance: 706.128289146
+Execution time:  21.0813685333  minutes

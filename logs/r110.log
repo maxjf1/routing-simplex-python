@@ -1,83 +1,47 @@
 Running for instance ./models/r110.txt
-Optimize a model with 101 rows, 2000 columns and 9919 nonzeros
-Variable types: 0 continuous, 2000 integer (0 binary)
+Generating routes...
+Execution time:  5.37391556667  minutes
+Academic license - for non-commercial use only
+Warning: constraint name "Cliente esta na rota" has a space
+Optimize a model with 26 rows, 5000 columns and 29949 nonzeros
+Variable types: 0 continuous, 5000 integer (0 binary)
 Coefficient statistics:
   Matrix range     [1e+00, 1e+00]
-  Objective range  [3e+01, 2e+02]
+  Objective range  [5e+01, 2e+02]
   Bounds range     [1e+00, 1e+00]
   RHS range        [1e+00, 2e+01]
-Presolve removed 0 rows and 3 columns
-Presolve time: 0.01s
-Presolved: 101 rows, 1997 columns, 9907 nonzeros
-Variable types: 0 continuous, 1997 integer (1997 binary)
+Found heuristic solution: objective 1028.2294982
+Presolve removed 0 rows and 2229 columns
+Presolve time: 0.03s
+Presolved: 26 rows, 2771 columns, 16332 nonzeros
+Found heuristic solution: objective 816.0703343
+Variable types: 0 continuous, 2771 integer (2771 binary)
 
-Root relaxation: objective 1.993201e+03, 565 iterations, 0.02 seconds
+Root relaxation: objective 5.059622e+02, 109 iterations, 0.00 seconds
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-     0     0 1993.20062    0   97          - 1993.20062      -     -    0s
-H    0     0                    2240.7159813 1993.20062  11.0%     -    0s
-     0     0 2007.37436    0  105 2240.71598 2007.37436  10.4%     -    0s
-     0     0 2012.66143    0  110 2240.71598 2012.66143  10.2%     -    0s
-     0     0 2012.68159    0  111 2240.71598 2012.68159  10.2%     -    0s
-     0     0 2012.68843    0  113 2240.71598 2012.68843  10.2%     -    0s
-     0     0 2016.42205    0  119 2240.71598 2016.42205  10.0%     -    0s
-     0     0 2016.82123    0  121 2240.71598 2016.82123  10.0%     -    0s
-     0     0 2016.93996    0  121 2240.71598 2016.93996  10.0%     -    0s
-     0     0 2017.73037    0  122 2240.71598 2017.73037  10.0%     -    0s
-     0     0 2017.74375    0  123 2240.71598 2017.74375  10.0%     -    0s
-     0     0 2019.11727    0  127 2240.71598 2019.11727  9.89%     -    0s
-     0     0 2019.16919    0  126 2240.71598 2019.16919  9.89%     -    0s
-     0     0 2019.17374    0  127 2240.71598 2019.17374  9.89%     -    0s
-     0     2 2019.17374    0  127 2240.71598 2019.17374  9.89%     -    0s
-H   31    31                    2228.7045105 2021.90277  9.28%  75.4    0s
-H   35    36                    2225.2534011 2021.90277  9.14%  73.8    1s
-H 1078   982                    2211.9813075 2021.90277  8.59%  23.4    2s
-H 1080   934                    2145.8684735 2024.61696  5.65%  23.4    3s
-  2345  1394 2122.10537   50   86 2145.86847 2055.59924  4.21%  33.0    5s
-H 8976  4006                    2144.9525347 2092.54379  2.44%  35.7    9s
- 11124  4748     cutoff   27      2144.95253 2096.58329  2.26%  35.6   10s
-*21835  6700              36    2143.3823922 2110.76990  1.52%  35.5   14s
-*22376  3011              27    2126.9438475 2111.80781  0.71%  35.6   14s
- 24695  1893     cutoff   35      2126.94385 2119.09398  0.37%  35.5   15s
+     0     0  505.96220    0   15  816.07033  505.96220  38.0%     -    0s
+H    0     0                     611.5616934  505.96220  17.3%     -    0s
+H    0     0                     508.1624443  505.96220  0.43%     -    0s
+H    0     0                     506.7034639  505.96220  0.15%     -    0s
+     0     0 infeasible    0       506.70346  506.70346  0.00%     -    0s
 
 Cutting planes:
-  Gomory: 1
-  MIR: 38
-  Flow cover: 23
-  Zero half: 4
+  Zero half: 2
 
-Explored 26907 nodes (915388 simplex iterations) in 15.53 seconds
+Explored 1 nodes (109 simplex iterations) in 0.05 seconds
 Thread count was 8 (of 8 available processors)
 
-Solution count 8: 2126.94 2143.38 2144.95 ... 2240.72
+Solution count 5: 506.703 508.162 611.562 ... 922.435
 
 Optimal solution found (tolerance 1.00e-04)
-Best objective 2.126943847547e+03, best bound 2.126793730800e+03, gap 0.0071%
-81 65
-52 82 47 49
-27 28
-83 5
-72 73 75 22 23
-29 79 76
-62 48 70
-75 67 41
-85 84 37
-8 45 97 93 100
-18 36
-31 7 11
-95 59 98
-21 57 38 42
-30 51 35 78
-40 54 55 25
-87 43 15
-53 94 99 17 60 89
-71 9 33
-19 69
-3 24 80 68
-2 63 90 32
-44 14 87 6
-12 86 37
-Distance: 2126.94384755
-Execution time:  0.28422775  minutes
+Best objective 5.067034639163e+02, best bound 5.067034639163e+02, gap 0.0000%
+5 7 19 11
+2 14 16 17
+12 9 3 24
+21 4 23 22 15
+6 18 20
+Distance: 506.703463916
+Execution time:  5.38050011667  minutes

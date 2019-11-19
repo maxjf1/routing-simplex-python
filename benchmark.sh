@@ -2,34 +2,34 @@
 
 # Roda para todas instâncias
 
-rm -rf ./logs/*.log
+# rm -rf ./logs/*.log
 
 my_array=(
-    c101
-    c102
-    c103
-    c104
-    c105
-    c106
-    c107
-    c108
-    c109
-    c201
-    c202
-    c203
-    c204
-    c205
-    c206
-    c207
-    c208
-    r101
-    r102
-    r103
-    r104
-    r105
-    r106
-    r107
-    r108
+    # c101
+    # c102
+    # c103
+    # c104
+    # c105
+    # c106
+    # c107
+    # c108
+    # c109
+    # c201
+    # c202
+    # c203
+    # c204
+    # c205
+    # c206
+    # c207
+    # c208
+    # # r101
+    # r102
+    # r103
+    # r104
+    # r105
+    # r106
+    # r107
+    # r108
     r109
     r110
     r111
@@ -64,5 +64,6 @@ my_array=(
 )
 
 for i in "${my_array[@]}"; do
+    rm ./logs/$i.log;
     (gurobi.sh main.py ./models/$i.txt || echo "FAIL!") 1>> ./logs/$i.log;
 done
