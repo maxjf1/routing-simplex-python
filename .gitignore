@@ -3,3 +3,5 @@
 __pycache__
 gurobi.log
 *.lp
+tmp/
+logs/errors.log

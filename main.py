@@ -14,7 +14,7 @@ def main():
         print "Running for instance " + file
         instance = Instance(readFile(file), 25)
         print "Generating routes..."
-        measure(lambda : instance.generateRoutes(5000))
+        measure(lambda : instance.generateRoutes(10000))
 
         # Create a new model
         m = Model("roteamento")
@@ -23,8 +23,6 @@ def main():
         J = [x for x in range(1, len(instance.customers))]
         x = {}   
         routes = instance.routes
-
-        #print("Custo rota", routes[0].distance)
 
         # Create variables
         for i in R:   
@@ -35,11 +33,9 @@ def main():
         m.setObjective(quicksum(routes[i].distance*x[i] for i in R), GRB.MINIMIZE)
         m.update()   
 
-        #print "TESTE", routes[67].distance
-
         # Add constraint
         for i in range(1, len(instance.customers)):               
-            m.addConstr(quicksum(int(routes[j].isInRoute(i)) * x[j] for j in R) >= 1, "Cliente esta na rota")
+            m.addConstr(quicksum(int(routes[j].isInRoute(i)) * x[j] for j in R) == 1, "Cliente esta na rota x%s"%(i))
         m.update()
 
         m.addConstr(quicksum(x[i] for i in R) <= instance.vehicles, "Max veiculos")
@@ -56,16 +52,16 @@ def main():
                 resultado.append(i)
                 soma+= instance.routes[i].distance
         
+        print "\nRoutes:" 
         for r in resultado:
-            print(instance.routes[r].getId())
+            print instance.routes[r].getId()
 
-        print "Distance:", soma
+        print "\nDistance:", soma
 
     except GurobiError as e:
         print('Error code ' + str(e.errno) + ": " + str(e))
 
     except AttributeError as e:
         print('Encountered an attribute error', e)
-
 
 measure(main)

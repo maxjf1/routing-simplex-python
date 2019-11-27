@@ -25,7 +25,7 @@ class Route:
             return self.id
 
         id = " ".join(map(lambda customer: str(
-            customer.id), self.customers[1:-2]))
+            customer.id), self.customers[1:-1]))
 
         if(self.customers[-1].id == self.customers[0].id):
             self.id = id

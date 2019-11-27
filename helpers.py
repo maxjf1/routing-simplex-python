@@ -27,7 +27,7 @@ def measure(callback):
     callback()
     end = datetime.datetime.utcnow()
     duration = end - start
-    print "Execution time: ", duration.total_seconds()/60, " minutes"
+    print "Execution time: ", duration.total_seconds(), " seconds"
 
 
 

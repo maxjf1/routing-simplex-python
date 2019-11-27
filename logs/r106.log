@@ -1,41 +1,44 @@
 Running for instance ./models/r106.txt
 Generating routes...
-Execution time:  4.26505103333  minutes
+Execution time:  88.093285  seconds
 Academic license - for non-commercial use only
-Warning: constraint name "Cliente esta na rota" has a space
-Optimize a model with 26 rows, 5000 columns and 31119 nonzeros
-Variable types: 0 continuous, 5000 integer (0 binary)
+Warning: constraint name "Cliente esta na rota x1" has a space
+Optimize a model with 26 rows, 10000 columns and 56817 nonzeros
+Variable types: 0 continuous, 10000 integer (0 binary)
 Coefficient statistics:
   Matrix range     [1e+00, 1e+00]
-  Objective range  [5e+01, 2e+02]
+  Objective range  [2e+01, 2e+02]
   Bounds range     [1e+00, 1e+00]
   RHS range        [1e+00, 2e+01]
-Found heuristic solution: objective 1295.9174145
-Presolve removed 0 rows and 2471 columns
-Presolve time: 0.04s
-Presolved: 26 rows, 2529 columns, 15824 nonzeros
-Found heuristic solution: objective 865.7364737
-Variable types: 0 continuous, 2529 integer (2529 binary)
+Found heuristic solution: objective 898.1478388
+Presolve removed 1 rows and 4696 columns
+Presolve time: 0.06s
+Presolved: 25 rows, 5304 columns, 24804 nonzeros
+Found heuristic solution: objective 888.3643969
+Variable types: 0 continuous, 5304 integer (5304 binary)
 
-Root relaxation: objective 5.714906e+02, 78 iterations, 0.00 seconds
+Root relaxation: objective 5.164879e+02, 100 iterations, 0.01 seconds
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-*    0     0               0     571.4906482  571.49065  0.00%     -    0s
+*    0     0               0     516.4879265  516.48793  0.00%     -    0s
 
-Explored 0 nodes (78 simplex iterations) in 0.05 seconds
+Explored 0 nodes (100 simplex iterations) in 0.09 seconds
 Thread count was 8 (of 8 available processors)
 
-Solution count 2: 571.491 865.736 
+Solution count 2: 516.488 888.364 
 
 Optimal solution found (tolerance 1.00e-04)
-Best objective 5.714906481753e+02, best bound 5.714906481753e+02, gap 0.0000%
-9
-18 8
-7 11 19 10 1
-2 14 15
-21 23 22 4 25
-5 16 6 12 24
-Distance: 571.490648175
-Execution time:  4.27345988333  minutes
+Best objective 5.164879265019e+02, best bound 5.164879265019e+02, gap 0.0000%
+
+Routes:
+18 8 17 5
+21 23 24 12
+2 15 22 4 25
+3 9 20 1
+7 11 19 10
+14 16 6 13
+
+Distance: 516.487926502
+Execution time:  89.070731  seconds

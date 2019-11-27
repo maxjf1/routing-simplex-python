@@ -1,62 +1,48 @@
 Running for instance ./models/c105.txt
 Generating routes...
-Execution time:  0.5806015  minutes
+Execution time:  12.462662  seconds
 Academic license - for non-commercial use only
-Warning: constraint name "Cliente esta na rota" has a space
-Optimize a model with 26 rows, 5000 columns and 32105 nonzeros
-Variable types: 0 continuous, 5000 integer (0 binary)
+Warning: constraint name "Cliente esta na rota x1" has a space
+Optimize a model with 26 rows, 10000 columns and 57646 nonzeros
+Variable types: 0 continuous, 10000 integer (0 binary)
 Coefficient statistics:
   Matrix range     [1e+00, 1e+00]
   Objective range  [2e+01, 2e+02]
   Bounds range     [1e+00, 1e+00]
   RHS range        [1e+00, 2e+01]
-Found heuristic solution: objective 831.3047258
-Presolve removed 0 rows and 334 columns
-Presolve time: 0.03s
-Presolved: 26 rows, 4666 columns, 29904 nonzeros
-Variable types: 0 continuous, 4666 integer (4666 binary)
+Found heuristic solution: objective 569.3865582
+Presolve removed 1 rows and 273 columns
+Presolve time: 0.06s
+Presolved: 25 rows, 9727 columns, 46322 nonzeros
+Variable types: 0 continuous, 9727 integer (9727 binary)
 
-Root relaxation: objective 2.290423e+02, 104 iterations, 0.01 seconds
+Root relaxation: objective 2.300037e+02, 125 iterations, 0.01 seconds
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-     0     0  229.04230    0   16  831.30473  229.04230  72.4%     -    0s
-H    0     0                     332.4423300  229.04230  31.1%     -    0s
-H    0     0                     318.1664172  229.04230  28.0%     -    0s
-H    0     0                     312.0009773  229.04230  26.6%     -    0s
-H    0     0                     308.6006497  229.04230  25.8%     -    0s
-H    0     0                     307.1639955  229.04230  25.4%     -    0s
-     0     0  238.96907    0   17  307.16400  238.96907  22.2%     -    0s
-     0     0  242.90764    0   26  307.16400  242.90764  20.9%     -    0s
-     0     0  243.84026    0   26  307.16400  243.84026  20.6%     -    0s
-     0     0  244.10858    0   27  307.16400  244.10858  20.5%     -    0s
-     0     0  244.61188    0   24  307.16400  244.61188  20.4%     -    0s
-H    0     0                     273.2362886  244.61188  10.5%     -    0s
-     0     0  249.09318    0   13  273.23629  249.09318  8.84%     -    0s
-     0     0  255.33767    0   22  273.23629  255.33767  6.55%     -    0s
-     0     0  257.89533    0   30  273.23629  257.89533  5.61%     -    0s
-     0     0  258.63536    0   28  273.23629  258.63536  5.34%     -    0s
-H    0     0                     266.0665979  258.63536  2.79%     -    0s
-     0     0  259.10114    0   28  266.06660  259.10114  2.62%     -    0s
-     0     0  259.30248    0   29  266.06660  259.30248  2.54%     -    0s
-H    0     0                     261.3930462  259.30248  0.80%     -    0s
-     0     0     cutoff    0       261.39305  261.39305  0.00%     -    0s
+     0     0  230.00370    0   18  569.38656  230.00370  59.6%     -    0s
+H    0     0                     304.9828079  230.00370  24.6%     -    0s
+     0     0  230.00370    0   18  304.98281  230.00370  24.6%     -    0s
+     0     2  230.00370    0   18  304.98281  230.00370  24.6%     -    0s
+*   12    14               3     273.0235993  240.03947  12.1%  13.8    0s
+*   44    16              12     270.9951896  248.36088  8.35%   8.8    0s
+*   66    15               7     267.6993207  255.82327  4.44%   8.2    0s
+*   67     7               5     262.3650806  255.82327  2.49%   8.3    0s
 
-Cutting planes:
-  MIR: 11
-  Zero half: 7
-
-Explored 1 nodes (366 simplex iterations) in 0.29 seconds
+Explored 76 nodes (698 simplex iterations) in 0.30 seconds
 Thread count was 8 (of 8 available processors)
 
-Solution count 9: 261.393 266.067 273.236 ... 831.305
+Solution count 6: 262.365 267.699 270.995 ... 569.387
 
 Optimal solution found (tolerance 1.00e-04)
-Best objective 2.613930461791e+02, best bound 2.613930461791e+02, gap 0.0000%
-13 17 18 19
-20 24 25 23 22
-8 10 11 16 14
-5 3 7 9 6 4 2
-Distance: 261.393046179
-Execution time:  0.591437416667  minutes
+Best objective 2.623650805976e+02, best bound 2.623650805976e+02, gap 0.0000%
+
+Routes:
+10 11 12 4
+20 24 25 23 22 21
+5 3 7 8 9 6 2 1
+13 17 18 19 15 16 14
+
+Distance: 262.365080598
+Execution time:  13.646102  seconds

@@ -1,45 +1,46 @@
 Running for instance ./models/c203.txt
 Generating routes...
-Execution time:  0.119202133333  minutes
+Execution time:  3.060576  seconds
 Academic license - for non-commercial use only
-Warning: constraint name "Cliente esta na rota" has a space
-Optimize a model with 26 rows, 5000 columns and 39347 nonzeros
-Variable types: 0 continuous, 5000 integer (0 binary)
+Warning: constraint name "Cliente esta na rota x1" has a space
+Optimize a model with 26 rows, 10000 columns and 76268 nonzeros
+Variable types: 0 continuous, 10000 integer (0 binary)
 Coefficient statistics:
   Matrix range     [1e+00, 1e+00]
-  Objective range  [4e+01, 3e+02]
+  Objective range  [2e+01, 3e+02]
   Bounds range     [1e+00, 1e+00]
   RHS range        [1e+00, 2e+01]
-Found heuristic solution: objective 1096.8680804
-Presolve removed 0 rows and 560 columns
-Presolve time: 0.03s
-Presolved: 26 rows, 4440 columns, 35047 nonzeros
-Found heuristic solution: objective 782.1213472
-Variable types: 0 continuous, 4440 integer (4440 binary)
+Found heuristic solution: objective 494.7153685
+Presolve removed 1 rows and 1795 columns
+Presolve time: 0.07s
+Presolved: 25 rows, 8205 columns, 55045 nonzeros
+Variable types: 0 continuous, 8205 integer (8205 binary)
 
-Root relaxation: objective 3.260763e+02, 75 iterations, 0.00 seconds
+Root relaxation: objective 3.243850e+02, 93 iterations, 0.01 seconds
 
     Nodes    |    Current Node    |     Objective Bounds      |     Work
  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-     0     0  326.07633    0   25  782.12135  326.07633  58.3%     -    0s
-H    0     0                     442.1494162  326.07633  26.3%     -    0s
-H    0     0                     368.5257409  326.07633  11.5%     -    0s
-H    0     0                     353.6563921  326.07633  7.80%     -    0s
-H    0     0                     352.7840487  326.07633  7.57%     -    0s
-H    0     0                     342.1419978  326.07633  4.70%     -    0s
-     0     0  331.40094    0   26  342.14200  331.40094  3.14%     -    0s
-     0     0     cutoff    0       342.14200  342.14200  0.00%     -    0s
+     0     0  324.38503    0   25  494.71537  324.38503  34.4%     -    0s
+H    0     0                     339.6617660  324.38503  4.50%     -    0s
+     0     0  325.34913    0   25  339.66177  325.34913  4.21%     -    0s
+     0     0  325.41884    0   25  339.66177  325.41884  4.19%     -    0s
+     0     0  325.43976    0   24  339.66177  325.43976  4.19%     -    0s
+     0     0  325.44480    0   24  339.66177  325.44480  4.19%     -    0s
+     0     0  325.44480    0   24  339.66177  325.44480  4.19%     -    0s
 
-Explored 1 nodes (140 simplex iterations) in 0.12 seconds
+Explored 1 nodes (122 simplex iterations) in 0.19 seconds
 Thread count was 8 (of 8 available processors)
 
-Solution count 7: 342.142 352.784 353.656 ... 961.723
+Solution count 2: 339.662 494.715 
 
 Optimal solution found (tolerance 1.00e-04)
-Best objective 3.421419977869e+02, best bound 3.421419977869e+02, gap 0.0000%
-21 9
-22 6 23 17 13
-5 2 4 7 3 1 12 19 16 18 14 15 10 8 21 20
-Distance: 342.141997787
-Execution time:  0.1269166  minutes
+Best objective 3.396617659528e+02, best bound 3.396617659528e+02, gap 0.0000%
+
+Routes:
+9 11
+22 6 23 17 13 25
+5 2 4 7 3 1 12 19 16 18 14 15 10 8 21 20 24
+
+Distance: 339.661765953
+Execution time:  4.129017  seconds
